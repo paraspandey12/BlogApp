@@ -110,7 +110,9 @@ const login = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const users = await user.find();
+    const userId=req.user.id  
+    const users = await user.findById(userId);
+    console.log(users)
     res.status(200).json(users);
   } catch (error) {
     console.error("Error fetching users:", error);
@@ -118,4 +120,30 @@ const getUsers = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getUsers, login };
+const updateUser = async (req, res) => {
+  try {
+    const userId = req.user.userId; 
+    const { fullname, email } = req.body;
+
+    if (!fullname || !email) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const updatedUser = await user.findByIdAndUpdate(
+      userId,
+      { fullname, email },
+      { new: true, runValidators: true }
+    ).select("-password"); 
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ message: "Profile updated successfully", user: updatedUser });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+module.exports = { createUser, getUsers, login,updateUser};

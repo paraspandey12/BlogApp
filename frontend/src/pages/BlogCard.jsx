@@ -30,7 +30,7 @@ function BlogCard({ content, author }) {
       </div>
       <p className="text-lg ml-2 text-gray-700 mt-4">{description}</p>
       
-      {/* Styling tags */}
+     
       <div className=" ml-2 flex flex-wrap gap-2 mt-4">
         {tags && tags.map((tag, i) => (
           <span key={i} className="px-3 py-1 bg-gray-200 text-black rounded-full text-sm font-medium">

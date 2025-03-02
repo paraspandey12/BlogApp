@@ -8,6 +8,7 @@ import Editor from "./pages/Editor";
 import Dashboard from "./components/Dashboard";
 import AuthProvider from "./context/AuthContext";
 import Home from "./pages/Home"
+import Profile from "./pages/Profile";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/Registration" element={<Registration/>} />
             <Route path="/Editor" element={<Editor/>} />
             <Route path="/Dashboard" element={<Dashboard/>} />
+            <Route path="/profile" element={<Profile/>}/>
           </Routes>
         </Router>
       </AuthProvider>

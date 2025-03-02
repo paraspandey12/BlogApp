@@ -8,6 +8,8 @@ router.get("/getBlog", BlogController.getPosts)
 router.get("/getLatest", BlogController.getLatest)
 router.get("/getTrendingBlog", BlogController.getTrendingBlogs)
 router.post("/searchBlog", BlogController.searchBlog)
+router.get("/getMyBlogs", authenticateUser,BlogController.getMyBlogs)
+
 
 
 

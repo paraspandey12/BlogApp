@@ -6,10 +6,12 @@ import { editorContext } from "./Editor";
 import EditorJS from "@editorjs/editorjs";
 import { Tools } from "./Tools";
 import { AuthContext } from "../context/AuthContext";
+import { FaArrowLeft } from "react-icons/fa";
+
 const BlogEditor = () => {
-  const {authtoken}=useContext(AuthContext)
+  const { authtoken } = useContext(AuthContext);
   const [bannerUrl, setBannerUrl] = useState(null);
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const {
     blog,
     blog: { title, banner, description, content },
@@ -17,7 +19,7 @@ const BlogEditor = () => {
     textEditor,
     setTextEditor,
     setEditorState,
-    draft
+    draft,
   } = useContext(editorContext);
 
   useEffect(() => {
@@ -95,7 +97,6 @@ const BlogEditor = () => {
   };
   const handleTitleKeyDown = (e) => {
     if (e.keyCode === 13) {
-      //enter key
       e.preventDefault();
     }
   };
@@ -122,7 +123,7 @@ const BlogEditor = () => {
       console.log(response.data);
       toast.success("saved Draft");
       setTimeout(() => {
-        navigate("/")
+        navigate("/");
       }, 500);
     } catch (error) {
       console.error("error saving blog draft", error);
@@ -158,6 +159,13 @@ const BlogEditor = () => {
       </nav>
       <section>
         <div className="mx-auto max-w-[900px] w-full">
+          <div
+            onClick={() => navigate("/dashboard")}
+            className="flex items-center cursor-pointer"
+          >
+            <FaArrowLeft />
+            <p className="px-2 ">back to home</p>
+          </div>
           <div className="relative aspect-3/2 hover:opacity-80 bg-white border-4 border-gray">
             <label htmlFor="uploadBanner">
               <img src={banner || "blog banner.png"} className="z-20" />
